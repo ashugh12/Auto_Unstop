@@ -1,4 +1,4 @@
-let id="22bcs113@ietdavv.edu.in";
-let pass="Harsh123@";
+let id="xyz@yxa.edu.in";
+let pass="******";
 
 export default{id, pass};
