@@ -15,15 +15,17 @@ async function main() {
     // Go to the Unstop login page
     await page.goto('https://unstop.com/auth/login?returnUrl=%2F');
 
+    await page.screenshot({ path: 'LoginPage.png' });
     // Wait for email selector
     await page.waitForSelector('input[formcontrolname="email"]', { visible: true });
 
     // Type in the email
     await page.type('input[formcontrolname="email"]', passkey.id);
-
+    await page.screenshot({ path: 'EmailTyping.png' });
     // Type in the password
     await page.type('#pwd', passkey.pass);
 
+    await page.screenshot({ path: 'passwordTyping.png' });
     // Click the login button
     await page.click('button[type="submit"]');
 
@@ -36,6 +38,7 @@ async function main() {
 
         // Navigate to the "Compete" section
         await page.waitForSelector('a[href*="compete"]', { visible: true });
+        await page.screenshot({ path: 'Compete.png' });
         await page.click('a[href*="compete"]'); // Click the "Compete" link
 
         await page.waitForNavigation({ timeout: 90000 });//Navigation timeout to ensure the free flow working
@@ -45,6 +48,7 @@ async function main() {
         const competitionsUrl = 'https://unstop.com/all-opportunities?oppstatus=open&domain=&course=6&specialization=&usertype=students';
         await page.goto(competitionsUrl, { waitUntil: 'networkidle2' }); 
 
+        await page.screenshot({ path: 'competitonPage.png' });
         /**Directly moving to the allopportunity page, I had went to the page directly through the url after login */
 
 
@@ -74,11 +78,14 @@ async function main() {
             await newPage.waitForSelector('mat-select[id="mat-select-2"]', { visible: true });
             await newPage.click('mat-select[id="mat-select-2"]');
 
+            await newPage.screenshot({ path: 'BEBTECH.png' });
+
             // await newPage.waitForSelector('mat-option[id="mat-option-1"]', { visible: true });
 
             // await newPage.click('mat-option[id="mat-option-1"]'); these works only when the browser cookies didn't save it
 
             await newPage.click('label[for="pass_out_year--2026"]');
+            await newPage.screenshot({ path: 'pass_out_year--2026.png' });
 
             await newPage.click("label[id='label_acceptance']");//click the checkbox automatically
 
@@ -101,13 +108,21 @@ async function main() {
                     break; // Exit the loop once found and clicked
                 }
             }
+            await newPage.screenshot({ path: 'after-india-selection.png' });
             console.log("contry of residence")
             // await newPage.waitForSelector('button[class="c-btn"]');
 
 
-            await newPage.waitForSelector('.align-center button');
+            // await newPage.waitForSelector('.align-center button');
             console.log("Clicked the button");
-            await newPage.click('.align-center button');//This will click registration button and hurreh you have register automatically
+
+            await newPage.click('.align-center button')  // Click the chosen hackathon card Every time 
+
+            // Wait for navigation to happen (if clicking leads to a new page)
+            await newPage.waitForNavigation({ waitUntil: 'load', timeout: 20000 }); 
+            // Take a screenshot of the new page
+            await newPage.screenshot({ path: 'registrationpage.png' });
+
 
             console.log("Select ")
             
