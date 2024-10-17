@@ -1,6 +1,9 @@
 {
-  "type": "module" ,
+  "type": "module",
   "dependencies": {
-    "puppeteer": "^23.5.3"
+    "nodemon": "^3.1.7",
+    "playwright": "^1.48.1",
+    "puppeteer": "^23.6.0",
+    "puppeteer-core": "^23.5.3"
   }
 }
